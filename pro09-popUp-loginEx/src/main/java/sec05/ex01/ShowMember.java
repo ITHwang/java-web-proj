@@ -10,17 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * Servlet implementation class ShowMember
- */
 @WebServlet("/show")
 public class ShowMember extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
@@ -30,9 +22,9 @@ public class ShowMember extends HttpServlet {
 		Boolean isLogon = false;
 		HttpSession session = request.getSession(false);
 
-		if (session != null) {
+		if (session != null) { //if session exists
 			isLogon = (Boolean) session.getAttribute("isLogon");
-			if (isLogon == true) {
+			if (isLogon == true) { //if values are matched with these in Oracle DB
 				id = (String) session.getAttribute("login.id");
 				pwd = (String) session.getAttribute("login.pwd");
 				out.print("<html><body>");
@@ -40,10 +32,10 @@ public class ShowMember extends HttpServlet {
 				out.print("비밀번호: " + pwd + "<br>");
 				out.print("</body></html>");
 			} else {
-				response.sendRedirect("login3.html");
+				response.sendRedirect("login.html");
 			}
 		} else {
-			response.sendRedirect("login3.html");
+			response.sendRedirect("login.html");
 		}
 	}
 

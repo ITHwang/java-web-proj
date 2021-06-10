@@ -2,6 +2,7 @@ package sec05.ex01;
 
 import java.sql.Date;
 
+// Member Value Obj
 public class MemberVO {
 	private String id;
 	private String pwd;

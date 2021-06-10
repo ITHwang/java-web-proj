@@ -18,6 +18,7 @@ public class MemberDAO {
 
 	public MemberDAO() {
 		try {
+			//DB ConnectionPool: ojdbc.jar and tomcat-dbcp.jar should be in ".../webapp/WEB-INF/lib/" (Oracle DB)
 			Context ctx = new InitialContext();
 			Context envContext = (Context) ctx.lookup("java:/comp/env");
 			dataFactory = (DataSource) envContext.lookup("jdbc/oracle");
@@ -27,10 +28,10 @@ public class MemberDAO {
 	}
 
 	public List<MemberVO> listMembers() {
-		List<MemberVO> list = new ArrayList<MemberVO>();
+		List<MemberVO> list = new ArrayList<MemberVO>(); //return this list
 
 		try {
-			con = dataFactory.getConnection();
+			con = dataFactory.getConnection(); //ConnectionPool instance can access to DB
 			String query = "select * from t_member ";
 			System.out.println("preparedStatement: " + query);
 			pstmt = con.prepareStatement(query);
@@ -72,6 +73,7 @@ public class MemberDAO {
 			query += " values(?, ?, ?, ?)";
 			System.out.println("prepareStatement: " + query);
 
+			//insert values of memberVO into question marks in query
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, id);
 			pstmt.setString(2, pwd);
@@ -89,7 +91,6 @@ public class MemberDAO {
 			con = dataFactory.getConnection();
 			String query = "delete from t_member" + " where id=?";
 			System.out.println("prepareStatement:" + query);
-			pstmt = con.prepareStatement(query);
 
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, id);
@@ -107,6 +108,7 @@ public class MemberDAO {
 
 		try {
 			con = dataFactory.getConnection();
+			//if count(*) is one true, else false
 			String query = "select decode(count(*), 1, 'true', 'false') as result from t_member";
 			query += " where id=? and pwd=?";
 
@@ -116,7 +118,7 @@ public class MemberDAO {
 			ResultSet rs = pstmt.executeQuery();
 
 			rs.next();
-			result = Boolean.parseBoolean(rs.getString("result"));
+			result = Boolean.parseBoolean(rs.getString("result")); //Note: convert to boolean type
 			System.out.println("result=" + result);
 		} catch (Exception e) {
 			e.printStackTrace();

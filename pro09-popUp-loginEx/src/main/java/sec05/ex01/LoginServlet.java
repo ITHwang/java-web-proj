@@ -10,26 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * Servlet implementation class LoginServlet
- */
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doHandle(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doHandle(request, response);
@@ -51,7 +39,7 @@ public class LoginServlet extends HttpServlet {
 		boolean result = dao.isExisted(memberVO);
 
 		if (result) {
-			HttpSession session = request.getSession();
+			HttpSession session = request.getSession(); //create session
 			session.setAttribute("isLogon", true);
 			session.setAttribute("login.id", user_id);
 			session.setAttribute("login.pwd", user_pwd);
@@ -62,7 +50,7 @@ public class LoginServlet extends HttpServlet {
 			out.print("</body></html>");
 		} else {
 			out.print("<html><body><center>회원 아이디가 틀립니다.");
-			out.print("<a href='login3.html'>다시 로그인하기</a>");
+			out.print("<a href='login.html'>다시 로그인하기</a>");
 			out.print("</body></html>");
 		}
 
