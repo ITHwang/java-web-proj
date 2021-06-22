@@ -8,7 +8,7 @@
 	request.setCharacterEncoding("utf-8");
 %>
 
-<jsp:useBean id="m" class="sec01.ex01.MemberBean" scope="page" />
+<jsp:useBean id="m" class="sec01.ex02.MemberBean" scope="page" />
 <%
 	String id = request.getParameter("id");
 	String pwd = request.getParameter("pwd");

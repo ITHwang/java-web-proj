@@ -6,7 +6,7 @@
 <%
 	request.setCharacterEncoding("utf-8");
 %>
-<jsp:useBean id="m" class="sec01.ex01.MemberBean" scope="page" />
+<jsp:useBean id="m" class="sec01.ex02.MemberBean" scope="page" />
 <jsp:setProperty name="m" property="id"/>
 <jsp:setProperty name="m" property="pwd"/>
 <jsp:setProperty name="m" property="name"/>
