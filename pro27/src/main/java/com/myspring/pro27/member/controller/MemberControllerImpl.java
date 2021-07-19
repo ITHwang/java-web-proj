@@ -95,7 +95,11 @@ public class MemberControllerImpl extends MultiActionController implements Membe
 		request.setCharacterEncoding("utf-8");
 		String id = request.getParameter("id");
 
-		String viewName = getViewName(request);
+		// 인터셉터 없을 때
+//		String viewName = getViewName(request);
+
+		// 인터셉터 있을 때
+		String viewName = (String) request.getAttribute("viewName");
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("id", id);
